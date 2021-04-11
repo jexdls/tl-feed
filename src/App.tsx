@@ -11,6 +11,7 @@ interface PostType {
   textBody: string;
   likes: number;
   shares: number;
+  dislikes: number;
   userImgSrc: string;
 }
 
@@ -24,13 +25,15 @@ function App() {
       textBody: "This is Sick!",
       likes: 2,
       shares: 5,
+      dislikes: 5,
       userImgSrc: "https://picsum.photos/700",
     },
     {
       callName: "Opoe",
       textBody: "I cant believe you did this",
-      likes: -200,
+      likes: 200,
       shares: 23,
+      dislikes: 23,
       userImgSrc: "https://picsum.photos/800",
     },
   ]);
@@ -50,7 +53,7 @@ function App() {
             postsState={{ Posts, setPosts }}
           />
           {Posts.map((post: PostType) => (
-            <Post post={post} />
+            <Post post={post} currCallName={currCallName} />
           ))}
         </div>
       </div>

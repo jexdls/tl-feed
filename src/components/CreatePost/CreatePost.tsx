@@ -8,6 +8,7 @@ interface PostType {
   textBody: string;
   likes: number;
   shares: number;
+  dislikes: number;
   userImgSrc: string;
 }
 
@@ -38,14 +39,15 @@ function CreatePost({
       <button
         onClick={() => {
           postsState.setPosts([
+            ...postsState.Posts,
             {
               callName: callNamepm,
               textBody: textBodyy,
               likes: 0,
               shares: 0,
+              dislikes: 0,
               userImgSrc: userImgSrcpm,
             },
-            ...postsState.Posts,
           ]);
           setTextBody("");
         }}

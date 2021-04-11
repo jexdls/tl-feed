@@ -9,14 +9,21 @@ type ActivityVar = {
   };
   likespm: number;
   sharespm: number;
+  dislikespm: number;
 };
 
-function ActivityButtons({ contChart, likespm, sharespm }: ActivityVar) {
+function ActivityButtons({
+  contChart,
+  likespm,
+  sharespm,
+  dislikespm,
+}: ActivityVar) {
   const [likes, setLikes] = useState(likespm);
   const [shares, setShares] = useState(sharespm);
+  const [dislikes, setDislikes] = useState(dislikespm);
 
-  const likeTakeOver = likes > 0 ? "text-red-600" : "text-gray-300";
-  const dislikeTakeOver = likes < 0 ? "text-black" : "text-gray-300";
+  const likeTakeOver = likes > dislikes ? "text-red-600" : "text-gray-300";
+  const dislikeTakeOver = likes < dislikes ? "text-black" : "text-gray-300";
   const hasShare = shares <= 0 ? "hover:" : "";
 
   return (
@@ -34,13 +41,13 @@ function ActivityButtons({ contChart, likespm, sharespm }: ActivityVar) {
         <button
           className={`focus:outline-none hover:text-black ${dislikeTakeOver}`}
           onClick={() => {
-            setLikes((likes) => likes - 1);
+            setDislikes((dislikes) => dislikes + 1);
           }}
         >
           <FaHeartBroken />
         </button>
 
-        <div>{likes}</div>
+        <div>{likes - dislikes}</div>
 
         <div className="w-2"></div>
 

@@ -1,37 +1,47 @@
 import { useState } from "react";
 
-function PostBody({ textBodypm }: { textBodypm: string }) {
+function PostBody({
+  textBodypm,
+  currCallName,
+  callName,
+}: {
+  textBodypm: string;
+  currCallName: string;
+  callName: string;
+}) {
   const [textBody, setTextBody] = useState(textBodypm);
   const [isEditing, setIsEditing] = useState(false);
   const [editText, setEditText] = useState(textBody);
 
   return (
     <div className="">
-      <div className="flex justify-end space-x-3">
-        <button
-          onClick={() => {
-            setTextBody(isEditing ? editText : textBody);
-            setIsEditing(!isEditing);
-          }}
-          className={`${
-            isEditing ? "text-gray-500" : "text-gray-200"
-          } hover:text-blue-500 focus:outline-none`}
-        >
-          {!isEditing ? "Edit" : "Confirm"}
-        </button>
-        {isEditing && (
+      {currCallName === callName && (
+        <div className="flex justify-end space-x-3">
           <button
             onClick={() => {
-              setIsEditing(false);
-              setTextBody(textBody);
-              setEditText(textBody);
+              setTextBody(isEditing ? editText : textBody);
+              setIsEditing(!isEditing);
             }}
-            className="focus:outline-none hover:text-blue-500 text-gray-500"
+            className={`${
+              isEditing ? "text-gray-500" : "text-gray-200"
+            } hover:text-blue-500 focus:outline-none`}
           >
-            Ignore
+            {!isEditing ? "Edit" : "Confirm"}
           </button>
-        )}
-      </div>
+          {isEditing && (
+            <button
+              onClick={() => {
+                setIsEditing(false);
+                setTextBody(textBody);
+                setEditText(textBody);
+              }}
+              className="focus:outline-none hover:text-blue-500 text-gray-500"
+            >
+              Ignore
+            </button>
+          )}
+        </div>
+      )}
       {!isEditing ? (
         <div className="p-3">{textBody}</div>
       ) : (

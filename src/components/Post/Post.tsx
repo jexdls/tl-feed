@@ -9,9 +9,16 @@ interface PostType {
   textBody: string;
   likes: number;
   shares: number;
+  dislikes: number;
   userImgSrc: string;
 }
-function Post({ post }: { post: PostType }) {
+function Post({
+  post,
+  currCallName,
+}: {
+  post: PostType;
+  currCallName: string;
+}) {
   const [showChart, setShowChart] = useState(false);
   const [hasNotif, setHasNotif] = useState(true);
 
@@ -32,8 +39,13 @@ function Post({ post }: { post: PostType }) {
         <PostHead userImgSrc={post.userImgSrc} callName={post.callName} />
         {!showChart ? (
           <>
-            <PostBody textBodypm={post.textBody} />
+            <PostBody
+              textBodypm={post.textBody}
+              currCallName={currCallName}
+              callName={post.callName}
+            />
             <ActivityButtons
+              dislikespm={post.dislikes}
               likespm={post.likes}
               sharespm={post.shares}
               contChart={{ setShowChart }}
