@@ -13,6 +13,8 @@ interface PostType {
   shares: number;
   dislikes: number;
   userImgSrc: string;
+  history: any;
+  id: number;
 }
 
 function App() {
@@ -21,20 +23,50 @@ function App() {
 
   const [Posts, setPosts] = useState([
     {
-      callName: "Jie",
+      id: 0,
+      callName: "Poo Per",
       textBody: "This is Sick!",
-      likes: 2,
-      shares: 5,
-      dislikes: 5,
+      likes: 0,
+      shares: 0,
+      dislikes: 0,
       userImgSrc: "https://picsum.photos/700",
+      history: [
+        {
+          label: "Likes",
+          data: [],
+        },
+        {
+          label: "Dislikes",
+          data: [],
+        },
+        {
+          label: "Shares",
+          data: [],
+        },
+      ],
     },
     {
-      callName: "Opoe",
+      id: 1,
+      callName: "Leo Pover",
       textBody: "I cant believe you did this",
-      likes: 200,
-      shares: 23,
-      dislikes: 23,
+      likes: 0,
+      shares: 0,
+      dislikes: 0,
       userImgSrc: "https://picsum.photos/800",
+      history: [
+        {
+          label: "Likes",
+          data: [],
+        },
+        {
+          label: "Disikes",
+          data: [],
+        },
+        {
+          label: "Shares",
+          data: [],
+        },
+      ],
     },
   ]);
 
@@ -53,7 +85,13 @@ function App() {
             postsState={{ Posts, setPosts }}
           />
           {Posts.map((post: PostType) => (
-            <Post post={post} currCallName={currCallName} />
+            <Post
+              postsState={{ Posts, setPosts }}
+              post={post}
+              currCallName={currCallName}
+              key={post.id.toString()}
+              id={post.id.toString()}
+            />
           ))}
         </div>
       </div>

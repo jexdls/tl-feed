@@ -10,6 +10,8 @@ interface PostType {
   shares: number;
   dislikes: number;
   userImgSrc: string;
+  history: any;
+  id: number;
 }
 
 function CreatePost({
@@ -41,12 +43,27 @@ function CreatePost({
           postsState.setPosts([
             ...postsState.Posts,
             {
+              id: postsState.Posts.length,
               callName: callNamepm,
               textBody: textBodyy,
               likes: 0,
               shares: 0,
               dislikes: 0,
               userImgSrc: userImgSrcpm,
+              history: [
+                {
+                  label: "Likes",
+                  data: [],
+                },
+                {
+                  label: "Disikes",
+                  data: [],
+                },
+                {
+                  label: "Shares",
+                  data: [],
+                },
+              ],
             },
           ]);
           setTextBody("");
